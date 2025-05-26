@@ -2,7 +2,7 @@
 
 MetaCare is a modern, responsive medical dashboard web application built with **Next.js**, **TypeScript**, and **Tailwind CSS**. It provides a centralized platform for patients and doctors to monitor vital health signs, manage appointments, and track wellness metrics with clean visuals and intuitive navigation.
 
-![MetaCare Dashboard]
+![MetaCare Liveview] - https://vibe-hackathon-project.vercel.app/
 
 ## 🚀 Features
 
