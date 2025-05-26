@@ -4,35 +4,29 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import {
-  LayoutDashboard,
-  Calendar,
-  FileText,
-  Pill,
-  Bell,
-  Settings,
+import { 
+  LayoutDashboard, 
+  Calendar, 
+  FileText, 
+  Pill, 
+  Bell, 
+  Settings, 
   LogOut,
   ChevronDown
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { mockUsers, mockNotifications } from '@/lib/mock-data';
-import { Button } from '@/components/ui/button';
-import { Sidebar } from '@/components/layout/sidebar';
-import { DashboardHeader } from '@/components/dashboard/header';
-import { VitalSignsChart } from '@/components/dashboard/vital-signs-chart';
-import { HealthScan } from '@/components/dashboard/health-scan';
-import { HealthReport } from '@/components/dashboard/health-report';
-import { HeartRateOverview, BloodPressureOverview } from '@/components/dashboard/health-overview';
 
 interface SidebarProps {
   className?: string;
 }
 
-export function Sidebarr({ className }: SidebarProps) {
+export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
-  const currentUser = mockUsers[0];
+  const currentUser = mockUsers[0]; // Use the patient as default
   const unreadNotifications = mockNotifications.filter(n => !n.read).length;
+
   const [medicationExpanded, setMedicationExpanded] = useState(false);
 
   const routes = [
@@ -79,7 +73,7 @@ export function Sidebarr({ className }: SidebarProps) {
         <Link href="/" className="flex items-center gap-2">
           <div className="bg-blue-500 rounded-full p-1.5">
             <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8 10L12 6M12 6L16 10M12 6V18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <span className="text-xl font-semibold">MetaCare.</span>
@@ -94,7 +88,7 @@ export function Sidebarr({ className }: SidebarProps) {
           </Avatar>
           <div className="flex flex-col">
             <span className="font-medium">{currentUser.name}</span>
-            <span className="text-sm text-gray-500 sm:block hidden">{currentUser.age} years</span>
+            <span className="text-sm text-gray-500">{currentUser.age} years</span>
           </div>
           <ChevronDown className="h-4 w-4 ml-auto text-gray-500" />
         </div>
@@ -108,7 +102,9 @@ export function Sidebarr({ className }: SidebarProps) {
                 href={route.href}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  pathname === route.href ? "bg-blue-500 text-white" : "text-gray-700 hover:bg-gray-100"
+                  pathname === route.href 
+                    ? "bg-blue-500 text-white" 
+                    : "text-gray-700 hover:bg-gray-100"
                 )}
                 onClick={route.expandable ? route.toggle : undefined}
               >
@@ -138,58 +134,6 @@ export function Sidebarr({ className }: SidebarProps) {
           <LogOut className="h-5 w-5 text-gray-500" />
           <span>Log Out</span>
         </Link>
-      </div>
-    </div>
-  );
-}
-
-export default function Home() {
-  return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar className="w-64 h-screen hidden md:block" />
-
-      <div className="flex-1 overflow-y-auto">
-        <main className="container mx-auto py-6 px-4 md:px-6 max-w-7xl">
-          <DashboardHeader />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm">
-              <VitalSignsChart />
-            </div>
-
-            <div className="lg:col-span-1">
-              <HealthScan />
-            </div>
-
-            <div className="lg:col-span-1">
-              <HealthReport />
-              <div className="mt-6 flex justify-center">
-                <Button variant="outline" className="w-full flex items-center gap-2" size="sm">
-                  <span>View Report</span>
-                  <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
-                  </svg>
-                </Button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-2 space-y-6">
-              <h2 className="text-xl font-semibold">Health Overview</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <HeartRateOverview />
-                <BloodPressureOverview />
-              </div>
-            </div>
-
-            <div className="lg:col-span-2 space-y-6 block sm:hidden">
-              <h2 className="text-xl font-semibold">Main menu</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Sidebarr className="w-full " />
-              </div>
-            </div>
-
-          </div>
-        </main>
       </div>
     </div>
   );
