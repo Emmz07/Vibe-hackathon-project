@@ -12,7 +12,7 @@ export function HealthReport() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-xl font-medium">Health Report</CardTitle>
+        <CardTitle className="text-xl font-medium">Health Reportt</CardTitle>
         <Button variant="ghost" size="icon">
           <MoreHorizontal className="h-5 w-5" />
         </Button>
