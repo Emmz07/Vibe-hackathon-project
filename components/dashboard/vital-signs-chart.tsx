@@ -32,7 +32,6 @@ const categories = [
   { id: 'hemoglobin', name: 'Hemoglobin' },
 ];
 
-type ChartEntry = typeof chartData[number];
 
 type CustomTooltipProps = {
   active?: boolean;
