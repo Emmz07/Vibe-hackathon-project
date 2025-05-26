@@ -1,4 +1,4 @@
-# MetaCare - Medical Dashboard Application
+# MetaCare - Medical Dashboard Application (PLP Group246)
 
 MetaCare is a modern, responsive medical dashboard web application built with **Next.js**, **TypeScript**, and **Tailwind CSS**. It provides a centralized platform for patients and doctors to monitor vital health signs, manage appointments, and track wellness metrics with clean visuals and intuitive navigation.
 
