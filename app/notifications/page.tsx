@@ -216,7 +216,7 @@ export default function NotificationsPage() {
                         </div>
                         <h3 className="text-lg font-medium">No notifications</h3>
                         <p className="text-gray-500 mt-1">
-                          You're all caught up! No new notifications.
+                          You&apos;re all caught up! No new notifications.
                         </p>
                       </div>
                     )}

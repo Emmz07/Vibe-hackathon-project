@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
   Pill,
-  Clock,
   AlertCircle,
   Check,
   Sun,
@@ -281,7 +280,7 @@ export default function MedicationsPage() {
               {/* Today's schedule */}
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Today's Schedule</CardTitle>
+                  <CardTitle className="text-lg font-medium">Today&apos;s Schedule</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">

@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import { 
-  ScatterChart, 
-  Scatter, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   ZAxis,
   Legend
@@ -32,7 +32,20 @@ const categories = [
   { id: 'hemoglobin', name: 'Hemoglobin' },
 ];
 
-const CustomTooltip = ({ active, payload }: any) => {
+type ChartEntry = typeof chartData[number];
+
+type CustomTooltipProps = {
+  active?: boolean;
+  payload?: Array<{
+    payload: {
+      name: string;
+      value: string;
+      unit: string;
+    };
+  }>;
+};
+
+const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
@@ -45,6 +58,11 @@ const CustomTooltip = ({ active, payload }: any) => {
     );
   }
   return null;
+};
+
+type ScatterShapeProps = {
+  cx?: number;
+  cy?: number;
 };
 
 export function VitalSignsChart() {
@@ -74,59 +92,57 @@ export function VitalSignsChart() {
             margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis 
-              type="number" 
-              dataKey="x" 
-              name="Reference" 
-              domain={[0, 100]} 
+            <XAxis
+              type="number"
+              dataKey="x"
+              name="Reference"
+              domain={[0, 100]}
               label={{ value: 'Reference', position: 'bottom' }}
             />
-            <YAxis 
-              type="number" 
-              dataKey="y" 
+            <YAxis
+              type="number"
+              dataKey="y"
               name="Measurements At Examination"
-              domain={[0, 100]} 
-              label={{ 
-                value: 'Measurements At Examination', 
-                angle: -90, 
-                position: 'left' 
-              }} 
+              domain={[0, 100]}
+              label={{
+                value: 'Measurements At Examination',
+                angle: -90,
+                position: 'left'
+              }}
             />
             <ZAxis type="number" dataKey="z" range={[100, 500]} />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
             {chartData.map((entry, index) => (
-              <Scatter 
-                key={index} 
-                name={entry.name} 
-                data={[entry]} 
-                fill={entry.color} 
-                shape={(props: any) => {
-                  return (
-                    <g>
-                      <circle
-                        cx={props.cx}
-                        cy={props.cy}
-                        r={entry.z / 20}
-                        fill={entry.color}
-                        fillOpacity={0.6}
-                        stroke={entry.color}
-                        strokeWidth={1}
-                      />
-                      <text
-                        x={props.cx}
-                        y={props.cy}
-                        textAnchor="middle"
-                        fill="white"
-                        fontSize={12}
-                        fontWeight="bold"
-                        dy=".3em"
-                      >
-                        {entry.value}
-                      </text>
-                    </g>
-                  );
-                }}
+              <Scatter
+                key={index}
+                name={entry.name}
+                data={[entry]}
+                fill={entry.color}
+                shape={(props: ScatterShapeProps) => (
+                  <g>
+                    <circle
+                      cx={props.cx}
+                      cy={props.cy}
+                      r={entry.z / 20}
+                      fill={entry.color}
+                      fillOpacity={0.6}
+                      stroke={entry.color}
+                      strokeWidth={1}
+                    />
+                    <text
+                      x={props.cx}
+                      y={props.cy}
+                      textAnchor="middle"
+                      fill="white"
+                      fontSize={12}
+                      fontWeight="bold"
+                      dy=".3em"
+                    >
+                      {entry.value}
+                    </text>
+                  </g>
+                )}
               />
             ))}
           </ScatterChart>
